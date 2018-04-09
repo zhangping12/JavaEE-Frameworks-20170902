@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- MyBatis 映射文件 定义 SQL 语句 -->
+<mapper namespace="book">
+    <insert id="create" parameterType="model.Book" useGeneratedKeys="true" keyProperty="id">
+        insert into db.book
+            value (null, #{title}, #{price}, #{amount}, #{pubTime})
+    </insert>
+    <select id="retrieve" resultType="model.Book">
+        select *
+        from db.book
+        order by id desc
+    </select>
+    <select id="queryById" resultType="model.Book">
+        select *
+        from db.book
+        where id = #{id}
+    </select>
+    <update id="update" parameterType="model.Book">
+        update db.book
+        set
+            title   = #{title},
+            price   = #{price},
+            amount  = #{amount},
+            pubTime = #{pubTime}
+        where id = #{id}
+    </update>
+    <delete id="delete" parameterType="int">
+        delete from db.book
+        where id = #{id}
+    </delete>
+</mapper>
